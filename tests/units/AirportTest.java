@@ -3,7 +3,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class AirportTest {
 
@@ -15,16 +15,17 @@ public class AirportTest {
     @Before
     public void beforeEachTestMethod() {
         this.airport = new Airport();
+        mockedPlane = mock(Plane.class);
     }
 
     @Test
     public void testPlaneCanLandInAirport() {
-         Assert.assertSame(mockedPlane, airport.land(mockedPlane));
+         Assert.assertEquals(mockedPlane, airport.land(mockedPlane));
     }
 
     @Test
     public void testPlaneCanTakeOff() {
-        Assert.assertSame(mockedPlane, airport.takeOff(mockedPlane));
+        Assert.assertEquals(mockedPlane, airport.takeOff(mockedPlane));
     }
 
 }
