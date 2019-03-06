@@ -16,4 +16,12 @@ public class PlaneTest {
     public void planeIsInitiallyLanded() {
         assertTrue(plane.landed);
     }
+
+    @Test
+    public void planeCanTakeOff() {
+        plane.takeOff();
+        assertFalse(plane.landed);
+    }
+
+
 }
