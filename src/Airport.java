@@ -18,10 +18,13 @@ public class Airport {
 
     public Plane takeOff(Plane plane) {
         plane.takeOff();
+        planes.remove(plane);
         return plane;
     }
 
     public Boolean hasPlane(Plane plane) {
         return planes.contains(plane);
     }
+
+
 }

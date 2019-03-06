@@ -34,4 +34,11 @@ public class AirportTest {
         Assert.assertTrue(airport.hasPlane(mockedPlane));
     }
 
+
+    @Test
+    public void testAirportConfirmsPlaneHasTakenOff() {
+        airport.land(mockedPlane);
+        airport.takeOff(mockedPlane);
+        Assert.assertFalse(airport.hasPlane(mockedPlane));
+    }
 }
