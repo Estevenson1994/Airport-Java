@@ -28,4 +28,10 @@ public class AirportTest {
         Assert.assertEquals(mockedPlane, airport.takeOff(mockedPlane));
     }
 
+    @Test
+    public void testAirportConfirmsPlaneHasLanded() {
+        airport.land(mockedPlane);
+        Assert.assertTrue(airport.hasPlane(mockedPlane));
+    }
+
 }
