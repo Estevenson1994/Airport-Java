@@ -1,4 +1,5 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -11,11 +12,19 @@ public class AirportTest {
     @Mock
     private Plane mockedPlane;
 
+    @Before
+    public void beforeEachTestMethod() {
+        this.airport = new Airport();
+    }
+
     @Test
     public void testPlaneCanLandInAirport() {
-        this.airport = new Airport();
          Assert.assertSame(mockedPlane, airport.land(mockedPlane));
+    }
 
+    @Test
+    public void testPlaneCanTakeOff() {
+        Assert.assertSame(mockedPlane, airport.takeOff(mockedPlane));
     }
 
 }
