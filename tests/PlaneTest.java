@@ -23,5 +23,10 @@ public class PlaneTest {
         assertFalse(plane.landed);
     }
 
-
+    @Test
+    public void planeCanLand() {
+        plane.takeOff();
+        plane.land();
+        assertTrue(plane.landed);
+    }
 }

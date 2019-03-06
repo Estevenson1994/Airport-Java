@@ -9,4 +9,8 @@ public class Plane {
     public void takeOff() {
         this.landed = false;
     }
+
+    public void land() {
+        this.landed = true;
+    }
 }
