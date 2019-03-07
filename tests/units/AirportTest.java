@@ -25,7 +25,7 @@ public class AirportTest {
     }
 
     @Test
-    public void testPlaneCanLandInAirport() {
+    public void testPlaneCanLandInAirport() throws WeatherException {
          Assert.assertEquals(mockedPlane, airport.land(mockedPlane));
     }
 
@@ -36,7 +36,7 @@ public class AirportTest {
     }
 
     @Test
-    public void testAirportConfirmsPlaneHasLanded() {
+    public void testAirportConfirmsPlaneHasLanded() throws WeatherException {
         airport.land(mockedPlane);
         Assert.assertTrue(airport.hasPlane(mockedPlane));
     }
@@ -59,8 +59,16 @@ public class AirportTest {
         airport.land(mockedPlane);
         when(mockedWeather.isStormy()).thenReturn(true);
         thrown.expect(WeatherException.class);
-        thrown.expectMessage("Weather is Stormy, cannot take off");
+        thrown.expectMessage("Weather is stormy, cannot take off");
         airport.takeOff(mockedPlane);
     }
 
+
+    @Test
+    public void testPlaneCannotLandWhenStormy() throws WeatherException {
+        when(mockedWeather.isStormy()).thenReturn(true);
+        thrown.expect(WeatherException.class);
+        thrown.expectMessage("Weather is stormy, cannot land");
+        airport.land(mockedPlane);
+    }
 }

@@ -11,16 +11,21 @@ public class Airport {
         this.weather = weather;
     }
 
-    public Plane land(Plane plane) {
-        plane.land();
-        planes.add(plane);
-        return plane;
+    public Plane land(Plane plane) throws WeatherException {
+        if (weather.isStormy()) {
+            throw new WeatherException("Weather is stormy, cannot land");
+        }
+        else {
+            plane.land();
+            planes.add(plane);
+            return plane;
+        }
     }
 
 
     public Plane takeOff(Plane plane) throws WeatherException {
         if (weather.isStormy()) {
-            throw new WeatherException("Weather is Stormy, cannot take off");
+            throw new WeatherException("Weather is stormy, cannot take off");
         }
         else {
             plane.takeOff();
