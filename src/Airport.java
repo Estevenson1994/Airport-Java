@@ -5,17 +5,19 @@ public class Airport {
 
     public List<Plane> planes;
     public Weather weather;
+    public int capacity;
 
-    public Airport(Weather weather) {
+    public Airport(Weather weather, int capacity) {
         this.planes = new ArrayList<>();
         this.weather = weather;
+        this.capacity = capacity;
     }
 
     public Plane land(Plane plane) throws WeatherException, AirportFullException {
         if (weather.isStormy()) {
             throw new WeatherException("Weather is stormy, cannot land");
         }
-        else if (numberofPlanes() >= 10) {
+        else if (numberofPlanes() >= capacity) {
            throw new AirportFullException("Airport is full, cannot land");
         }
         else {

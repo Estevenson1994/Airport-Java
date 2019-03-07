@@ -11,7 +11,7 @@ public class AirportFeatureTest {
 
     @Before
     public void beforeEachFeatureTest() {
-        this.airport = new Airport(weather);
+        this.airport = new Airport(weather, 10);
         this.plane = new Plane();
     }
 

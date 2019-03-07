@@ -21,7 +21,7 @@ public class AirportTest {
     public void beforeEachTestMethod() {
         mockedPlane = mock(Plane.class);
         mockedWeather = mock(Weather.class);
-        this.airport = new Airport(mockedWeather);
+        this.airport = new Airport(mockedWeather, 10);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class AirportTest {
         when(mockedWeather.isStormy()).thenReturn(false);
         thrown.expect(AirportFullException.class);
         thrown.expectMessage("Airport is full, cannot land");
-        for (int i = 0; i < 11; i++ ) {
+        for (int i = 0; i <= airport.capacity; i++ ) {
             airport.land(mockedPlane);
         }
     }
