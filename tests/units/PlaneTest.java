@@ -13,19 +13,19 @@ public class PlaneTest {
     }
 
     @Test
-    public void planeIsInitiallyLanded() {
-        assertTrue(plane.landed);
+    public void planeIsIntiallyNotLanded() {
+        assertFalse(plane.landed);
     }
 
     @Test
     public void planeCanTakeOff() {
+        plane.land();
         plane.takeOff();
         assertFalse(plane.landed);
     }
 
     @Test
     public void planeCanLand() {
-        plane.takeOff();
         plane.land();
         assertTrue(plane.landed);
     }

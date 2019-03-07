@@ -3,7 +3,7 @@ public class Plane {
     public Boolean landed;
 
     public Plane() {
-        this.landed = true;
+        this.landed = false;
     }
 
     public void takeOff() {
