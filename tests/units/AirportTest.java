@@ -30,8 +30,9 @@ public class AirportTest {
     }
 
     @Test
-    public void testPlaneCanTakeOff() throws WeatherException {
+    public void testPlaneCanTakeOff() throws WeatherException, AirportFullException {
         when(mockedWeather.isStormy()).thenReturn(false);
+        airport.land(mockedPlane);
         Assert.assertEquals(mockedPlane, airport.takeOff(mockedPlane));
     }
 
