@@ -11,9 +11,12 @@ public class Airport {
         this.weather = weather;
     }
 
-    public Plane land(Plane plane) throws WeatherException {
+    public Plane land(Plane plane) throws WeatherException, AirportFullException {
         if (weather.isStormy()) {
             throw new WeatherException("Weather is stormy, cannot land");
+        }
+        else if (planes.size() >= 10) {
+           throw new AirportFullException("Airport is full, cannot land");
         }
         else {
             plane.land();

@@ -16,14 +16,14 @@ public class AirportFeatureTest {
     }
 
     @Test
-    public void planeCanTakeOffFromAirport() throws WeatherException {
+    public void planeCanTakeOffFromAirport() throws WeatherException, AirportFullException {
         airport.takeOff(plane);
         assertFalse(plane.landed);
         assertFalse(airport.hasPlane(plane));
     }
 
     @Test
-    public void planeCanLandAtAirport() throws WeatherException {
+    public void planeCanLandAtAirport() throws WeatherException, AirportFullException {
         airport.takeOff(plane);
         airport.land(plane);
         assertTrue(plane.landed);

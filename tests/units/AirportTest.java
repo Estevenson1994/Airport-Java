@@ -25,7 +25,7 @@ public class AirportTest {
     }
 
     @Test
-    public void testPlaneCanLandInAirport() throws WeatherException {
+    public void testPlaneCanLandInAirport() throws WeatherException, AirportFullException{
          Assert.assertEquals(mockedPlane, airport.land(mockedPlane));
     }
 
@@ -36,14 +36,14 @@ public class AirportTest {
     }
 
     @Test
-    public void testAirportConfirmsPlaneHasLanded() throws WeatherException {
+    public void testAirportConfirmsPlaneHasLanded() throws WeatherException, AirportFullException {
         airport.land(mockedPlane);
         Assert.assertTrue(airport.hasPlane(mockedPlane));
     }
 
 
     @Test
-    public void testAirportConfirmsPlaneHasTakenOff() throws WeatherException {
+    public void testAirportConfirmsPlaneHasTakenOff() throws WeatherException, AirportFullException {
         airport.land(mockedPlane);
         when(mockedWeather.isStormy()).thenReturn(false);
         airport.takeOff(mockedPlane);
@@ -55,7 +55,7 @@ public class AirportTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testPlaneCannotTakeOffWhenStormy() throws WeatherException {
+    public void testPlaneCannotTakeOffWhenStormy() throws WeatherException, AirportFullException {
         airport.land(mockedPlane);
         when(mockedWeather.isStormy()).thenReturn(true);
         thrown.expect(WeatherException.class);
@@ -65,10 +65,20 @@ public class AirportTest {
 
 
     @Test
-    public void testPlaneCannotLandWhenStormy() throws WeatherException {
+    public void testPlaneCannotLandWhenStormy() throws WeatherException, AirportFullException {
         when(mockedWeather.isStormy()).thenReturn(true);
         thrown.expect(WeatherException.class);
         thrown.expectMessage("Weather is stormy, cannot land");
         airport.land(mockedPlane);
+    }
+
+    @Test
+    public void testPlaneCannotLandWhenAirportIsFull() throws WeatherException, AirportFullException {
+        when(mockedWeather.isStormy()).thenReturn(false);
+        thrown.expect(AirportFullException.class);
+        thrown.expectMessage("Airport is full, cannot land");
+        for (int i = 0; i < 11; i++ ) {
+            airport.land(mockedPlane);
+        }
     }
 }
