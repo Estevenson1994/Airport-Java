@@ -15,7 +15,7 @@ public class Airport {
         if (weather.isStormy()) {
             throw new WeatherException("Weather is stormy, cannot land");
         }
-        else if (planes.size() >= 10) {
+        else if (numberofPlanes() >= 10) {
            throw new AirportFullException("Airport is full, cannot land");
         }
         else {
@@ -39,6 +39,10 @@ public class Airport {
 
     public Boolean hasPlane(Plane plane) {
         return planes.contains(plane);
+    }
+
+    private int numberofPlanes() {
+        return planes.size();
     }
 
 
