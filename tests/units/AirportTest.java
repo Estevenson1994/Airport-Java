@@ -1,9 +1,12 @@
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AirportTest {
 
@@ -11,11 +14,14 @@ public class AirportTest {
 
     @Mock
     private Plane mockedPlane;
+    private Weather mockedWeather;
+
 
     @Before
     public void beforeEachTestMethod() {
-        this.airport = new Airport();
         mockedPlane = mock(Plane.class);
+        mockedWeather = mock(Weather.class);
+        this.airport = new Airport(mockedWeather);
     }
 
     @Test
@@ -24,7 +30,8 @@ public class AirportTest {
     }
 
     @Test
-    public void testPlaneCanTakeOff() {
+    public void testPlaneCanTakeOff() throws WeatherException {
+        when(mockedWeather.isStormy()).thenReturn(false);
         Assert.assertEquals(mockedPlane, airport.takeOff(mockedPlane));
     }
 
@@ -36,9 +43,24 @@ public class AirportTest {
 
 
     @Test
-    public void testAirportConfirmsPlaneHasTakenOff() {
+    public void testAirportConfirmsPlaneHasTakenOff() throws WeatherException {
         airport.land(mockedPlane);
+        when(mockedWeather.isStormy()).thenReturn(false);
         airport.takeOff(mockedPlane);
         Assert.assertFalse(airport.hasPlane(mockedPlane));
     }
+
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void testPlaneCannotTakeOffWhenStormy() throws WeatherException {
+        airport.land(mockedPlane);
+        when(mockedWeather.isStormy()).thenReturn(true);
+        thrown.expect(WeatherException.class);
+        thrown.expectMessage("Weather is Stormy, cannot take off");
+        airport.takeOff(mockedPlane);
+    }
+
 }
