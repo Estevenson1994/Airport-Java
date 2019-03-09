@@ -9,7 +9,7 @@ Here is an attempt at the [Makers Academy](https://makers.tech/) Airport Weekend
 
 ## Diagrams
 
-![Screenshot](https://i.imgur.com/7zLnxVk.png)
+![Screenshot](https://i.imgur.com/X5s7Fug.png)
 
 ## How the program works in jshell:
 
